@@ -8,8 +8,8 @@ import os, random,  pickle,  time
 
 import fcp
 fcpHost = "127.0.0.1"
-seedNodes = 1
-openNodes = 10
+seedNodes = 3
+openNodes = 100
 lowestfcpport = 9481+seedNodes
 highestfcpport = lowestfcpport + (openNodes-1)
 

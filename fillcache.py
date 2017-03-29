@@ -8,12 +8,12 @@ import sys, os, tempfile, random, uuid,  pickle,  time
 
 import fcp
 fcpHost = "127.0.0.1"
-seedNodes = 1
-openNodes = 10
+seedNodes = 3
+openNodes = 100
 lowestfcpport = 9481+seedNodes
 highestfcpport = lowestfcpport + openNodes
 
-networkcachesize = 1 #in GB, round this to nearest int you want it to be
+networkcachesize = 17 # *100mb, round this to nearest int you want it to be
 
 uriTable = pickle.load(open("./URI_table.txt","rb"))
 
@@ -89,7 +89,7 @@ while i < networkcachesize:
     pickle.dump(putCHKs,  open('./putjobs.txt', 'w'))
     
     changefileset(dirList)
-    print("1 gigabyte of files successsfully put!")
+    print("100mb of files successsfully put!")
     i += 1
     time.sleep(30)
 
