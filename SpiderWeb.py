@@ -22,8 +22,8 @@ fcpPort = "9485"
 uriTable = pickle.load(open("./URI_table.txt","rb"))
 
 nodes =  []
-numberOfNodes = 9
-for i in range((2+numberOfNodes)):
+numberOfNodes = 103
+for i in range((numberOfNodes)):
     fcpPort = 9481 + i
     node = fcp.FCPNode(host=fcpHost, port = fcpPort,  verbosity=fcp.FATAL)
     nodes.append(node.listpeers())
