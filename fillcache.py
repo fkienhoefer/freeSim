@@ -13,7 +13,7 @@ openNodes = 50
 lowestfcpport = 9481+seedNodes
 highestfcpport = lowestfcpport + openNodes
 
-networkcachesize = 7 # *100mb, round this to nearest int you want it to be
+networkcachesize = 70 # *10mb, round this to nearest int you want it to be
 
 #Lists for done *jobs
 putJobs =  []

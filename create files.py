@@ -10,7 +10,7 @@ filesize = 100000 #000
 
 iterations = math.trunc(((amount_of_Nodes*cachesize_byte)/filesize)/10)
 uriList = []
-for i in range(1, 1001):
+for i in range(1, 101):
     sfile= 'file' + str(i)
     with open('./Test/'+sfile, 'wb') as fout:
         fout.write(os.urandom(filesize)) # replace 1024 with size_kb if not unreasonably large
