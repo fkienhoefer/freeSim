@@ -8,21 +8,21 @@ import sys, os, tempfile, random, uuid,  pickle,  time
 
 import fcp
 fcpHost = "127.0.0.1"
-seedNodes = 3
-openNodes = 100
+seedNodes = 2
+openNodes = 50
 lowestfcpport = 9481+seedNodes
 highestfcpport = lowestfcpport + openNodes
 
-networkcachesize = 17 # *100mb, round this to nearest int you want it to be
-
-uriTable = pickle.load(open("./URI_table.txt","rb"))
+networkcachesize = 7 # *100mb, round this to nearest int you want it to be
 
 #Lists for done *jobs
 putJobs =  []
 putCHKs = []
 #Empty textfiles that save said lists
-pickle.dump(putJobs,  open('./putjobs.txt', 'wb'))
-pickle.dump(putJobs,  open('./getjobs.txt', 'wb'))
+#pickle.dump(putJobs,  open('./putjobs.txt', 'wb'))
+with open('./putjobs.txt', 'wb') as f:
+    pickle.dump(putJobs, f)
+#pickle.dump(putJobs,  open('./getjobs.txt', 'wb'))
 
 dirList = os.listdir('./Test')
 
@@ -86,7 +86,9 @@ while i < networkcachesize:
                 # or we can await its completion
                 print ("Waiting on a Job")
                 result = job.wait()
-    pickle.dump(putCHKs,  open('./putjobs.txt', 'w'))
+    #pickle.dump(putCHKs,  open('./putjobs.txt', 'w'))
+    with open('./putjobs.txt', 'wb') as f:
+        pickle.dump(putJobs, f)
     
     changefileset(dirList)
     print("100mb of files successsfully put!")

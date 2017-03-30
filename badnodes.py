@@ -8,8 +8,8 @@ import os, random,  pickle,  time
 
 import fcp
 fcpHost = "127.0.0.1"
-seedNodes = 3
-openNodes = 100
+seedNodes = 2
+openNodes = 50
 monitorNodes = 5
 badNodes = 10 
 lowestfcpport = 9481+seedNodes+openNodes+monitorNodes
@@ -18,7 +18,9 @@ highestfcpport = lowestfcpport + (badNodes-1)
 #Empty textfiles that save said lists
 putCHKs = []
 if (os.path.isfile('./badjobs.txt')):
-    putCHKs = pickle.load( open('./badjobs.txt', 'rb'))
+    #putCHKs = pickle.load( open('./badjobs.txt', 'rb'))
+    with open('./badjobs.txt', 'rb') as f:
+        putCHKs = pickle.load(f)
 dirList = os.listdir('./Bad')
 
 def split(sequence, number_of_chunks):
@@ -74,7 +76,9 @@ for item in dirList:
 for job in jobs:
     print("Waiting for CHK")
     putCHKs.append(job.wait())
-pickle.dump(putCHKs,  open('./badjobs.txt', 'w'))
+#pickle.dump(putCHKs,  open('./badjobs.txt', 'w'))
+with open('./badjobs.txt', 'wb') as f:
+    pickle.dump(putCHKs, f)
 
 while True:
     print("We arrived in the endless badlands (We are calling our inserts and inserting 10 new ones at the end)")
@@ -86,3 +90,4 @@ while True:
     putfiles(dirList)
     time.sleep(random.randint(3,  10))
     
+

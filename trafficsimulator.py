@@ -8,13 +8,15 @@ import os, random,  pickle,  time
 
 import fcp
 fcpHost = "127.0.0.1"
-seedNodes = 3
-openNodes = 100
+seedNodes = 2
+openNodes = 50
 lowestfcpport = 9481+seedNodes
 highestfcpport = lowestfcpport + (openNodes-1)
 
 #Empty textfiles that save said lists
-putCHKs = pickle.load( open('./putjobs.txt', 'rb'))
+#putCHKs = pickle.load( open('./putjobs.txt', 'rb'))
+with open('./putjobs.txt', 'rb') as f:
+    putCHKs = pickle.load(f)
 dirList = os.listdir('./Test')
 
 def split(sequence, number_of_chunks):
@@ -53,7 +55,9 @@ while True:
         print("Inserting new file")
         putCHKs.append(job.wait())
         print("Insert successful! CHK = "+ job.getResult())
-        pickle.dump(putCHKs,  open('./putjobs.txt', 'a'))
+        #pickle.dump(putCHKs,  open('./putjobs.txt', 'w'))
+        with open('./putjobs.txt', 'wb') as f:
+            pickle.dump(putCHKs, f)
         
     else:
         if(putCHKs != []):

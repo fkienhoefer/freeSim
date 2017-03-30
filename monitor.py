@@ -8,8 +8,8 @@ import os, random,  pickle,  time
 
 import fcp
 fcpHost = "127.0.0.1"
-seedNodes = 3
-openNodes = 100
+seedNodes = 2
+openNodes = 50
 monitorNodes = 5
 lowestfcpport = 9481+seedNodes+ openNodes
 highestfcpport = lowestfcpport + (monitorNodes-1)
@@ -22,7 +22,9 @@ successfulCHKs = []
 def getCHKList():
     bool = False
     while (bool == False):
-        sequence =  pickle.load( open('./putjobs.txt', 'rb'))
+        #sequence =  pickle.load( open('./putjobs.txt', 'rb'))
+        with open('./putjobs.txt', 'rb') as f:
+            sequence = pickle.load(f)
         if (sequence == []):
             time.sleep(3)
             print("Waiting for CHK list")
@@ -72,7 +74,8 @@ while True:
             print("Getting CHK: " + CHK)
             node.get(CHK, async = True,  timeout = 360,  ignoreDS = True,  )
             monitoredCHKs.append(CHK)
-            pickle.dump(monitoredCHKs,  open('./monitoredCHKs.txt', 'w'))
+            with open('./monitoredCHKs.txt', "wb") as f:
+                pickle.dump(monitoredCHKs, f)
         else:
             print("putCHKS is empty, mate!")
         time.sleep(10)
