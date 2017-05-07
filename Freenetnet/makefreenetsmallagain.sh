@@ -77,6 +77,6 @@ do
 	FPORT=$(( $FPORT + 1 ))
 	HPORT=$(( $HPORT + 1 ))
 	done
-	sleep(100)
+	sleep 100
 
 done
